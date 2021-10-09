@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es6",
+    "module": "commonjs",
+    "paths": {
+      "@atoms": ["./src/components/atoms"],
+      "@atoms/*": ["./src/components/atoms/*"],
+      "@module": ["./src/components/module"],
+      "@module/*": ["./src/components/module/*"],
+      "@container": ["./src/components/container"],
+      "@container/*": ["./src/components/container/*"],
+      "@pages": ["./src/components/pages"],
+      "@pages/*": ["./src/components/pages/*"],
+      "@hooks": ["./src/hooks"],
+      "@api/*": ["./src/api/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@dummies/*": ["./src/dummies/*"]
+    }
+  },
+  "include": ["src"]
+}

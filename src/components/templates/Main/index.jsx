@@ -95,7 +95,7 @@ export const Main = () => {
   return (
     <>
       <section className="scroll-section" id="scroll-section-0">
-        <h1> Welcome Wedding</h1>
+        <h1> Welcome Wedding1111111</h1>
         <div className="sticky-element main-message">
           <p> 동해물과 백두산이 <br></br> 마르고 닳도록 </p>
         </div>
@@ -112,7 +112,7 @@ export const Main = () => {
 
       <section className="scroll-section" id="scroll-section-1">
         <p className="description">
-          <strong> 강조 영역 </strong>
+          <strong> 강조 영역 123123 </strong>
           Lorem ipsum dolor sit amet, consecture, test everythigs, in the
           miracle oh nol ra woe ra
         </p>
