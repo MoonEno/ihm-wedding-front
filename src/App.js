@@ -10,11 +10,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import lodash from "lodash";
 
 import { WelcomePage } from "@pages/Welcome";
+import { MainPage } from "@pages/Main";
 
 const App = () => {
   window._ = lodash;
-
-  const [, loadingApi] = useLoading();
 
   /**
    * 상황에 따른 페이지 분리
