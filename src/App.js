@@ -48,7 +48,7 @@ const App = () => {
       <div className="container">
         <BrowserRouter>
           <Switch>
-            <Route path="/" component={WelcomePage} />
+            <Route path="/" component={MainPage} />
             <Route path="/main" component={MainPage} />
             <Route path="*" component={pageNotFound} />
           </Switch>
