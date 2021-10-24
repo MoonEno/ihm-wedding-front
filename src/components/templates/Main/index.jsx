@@ -14,6 +14,11 @@ export const Main = () => {
     // const [rafState, setRafState] = useState('');
     // const [sceneInfo, setSceneInfo] = useState([]);
 
+    const [accountDisplay, setAccountDisplay] = useState({});
+    const [mDisplayStr, setMDisplayStr] = useState('신랑측 계좌번호 확인');
+    const [mAccountShow, setMAccountShow] = useState(false);
+    const [gDisplayStr, setGDisplayStr] = useState('신부측  계좌번호 확인');
+    const [gAccountShow, setGAccountShow] = useState(false);
     const [footerMsg, setFooterMsg] = useState('const 20211120 = (2) => { return 1 }');
     
     let yOffset = 0; // window.pageYOffset 대신 쓸 변수
@@ -29,7 +34,7 @@ export const Main = () => {
     const settingSceneInfo = () => {
         let sceneInfoList = [
             {
-                // 0
+                // 0 스타일 세팅
                 type: 'sticky',
                 heightNum: 5, // 브라우저 높이의 5배로 scrollHeight 세팅
                 scrollHeight: 0,
@@ -43,25 +48,25 @@ export const Main = () => {
                     context: document.querySelector('#video-canvas-0').getContext('2d'),
                     videoImages: []
                 },
-                values: { // 기본 300, img [0, 299]
-                    videoImageCount: 120,
-                    imageSequence: [0, 120],
+                values: {
+                    videoImageCount: 659,
+                    imageSequence: [0, 658],
                     canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
-                    messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
-                    messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
-                    messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
-                    messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
-                    messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2 }],
-                    messageB_translateY_in: [20, 0, { start: 0.3, end: 0.4 }],
-                    messageC_translateY_in: [20, 0, { start: 0.5, end: 0.6 }],
+                    messageA_opacity_in: [0, 1, { start: 0, end: 0.25 }],
+                    messageB_opacity_in: [0, 1, { start: 0.3, end: 0.5 }],
+                    messageC_opacity_in: [0, 1, { start: 0.55, end: 0.8 }],
+                    // messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
+                    messageA_translateY_in: [20, 0, { start: 0.05, end: 0.25 }],
+                    messageB_translateY_in: [20, 0, { start: 0.3, end: 0.5 }],
+                    messageC_translateY_in: [20, 0, { start: 0.55, end: 0.8 }],
                     messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
                     messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3 }],
-                    messageB_opacity_out: [1, 0, { start: 0.45, end: 0.5 }],
-                    messageC_opacity_out: [1, 0, { start: 0.65, end: 0.7 }],
-                    messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+                    messageB_opacity_out: [1, 0, { start: 0.5, end: 0.55 }],
+                    messageC_opacity_out: [1, 0, { start: 0.8, end: 0.9 }],
+                    // messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
                     messageA_translateY_out: [0, -20, { start: 0.25, end: 0.3 }],
-                    messageB_translateY_out: [0, -20, { start: 0.45, end: 0.5 }],
-                    messageC_translateY_out: [0, -20, { start: 0.65, end: 0.7 }],
+                    messageB_translateY_out: [0, -20, { start: 0.5, end: 0.55 }],
+                    messageC_translateY_out: [0, -20, { start: 0.8, end: 0.9}],
                     messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9 }]
                 }
             },
@@ -85,41 +90,25 @@ export const Main = () => {
                     messageA: document.querySelector('#scroll-section-2 .a'),
                     messageB: document.querySelector('#scroll-section-2 .b'),
                     messageC: document.querySelector('#scroll-section-2 .c'),
-                    pinB: document.querySelector('#scroll-section-2 .b .pin'),
-                    pinC: document.querySelector('#scroll-section-2 .c .pin'),
                     canvas: document.querySelector('#video-canvas-1'),
                     context: document.querySelector('#video-canvas-1').getContext('2d'),
                     videoImages: []
                 },
                 values: {
-                    videoImageCount: 960,
-                    imageSequence: [0, 959],
+                    videoImageCount: 620,
+                    imageSequence: [0, 619],
                     canvas_opacity_in: [0, 1, { start: 0, end: 0.1 }],
                     canvas_opacity_out: [1, 0, { start: 0.95, end: 1 }],
-                    messageA_translateY_in: [20, 0, { start: 0.15, end: 0.2 }],
-                    messageB_translateY_in: [30, 0, { start: 0.5, end: 0.55 }],
-                    messageC_translateY_in: [30, 0, { start: 0.72, end: 0.77 }],
-                    messageA_opacity_in: [0, 1, { start: 0.15, end: 0.2 }],
-                    messageB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-                    messageC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-                    messageA_translateY_out: [0, -20, { start: 0.3, end: 0.35 }],
-                    messageB_translateY_out: [0, -20, { start: 0.58, end: 0.63 }],
-                    messageC_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
-                    messageA_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
-                    messageB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-                    messageC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
-                    pinB_scaleY: [0.5, 1, { start: 0.5, end: 0.55 }],
-                    pinC_scaleY: [0.5, 1, { start: 0.72, end: 0.77 }],
-                    pinB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-                    pinC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-                    pinB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-                    pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }]
+                    messageA_translateY_in: [20, 0, { start: 0.15, end: 0.85 }],
+                    messageA_opacity_in: [0, 1, { start: 0.15, end: 0.85 }],
+                    messageA_translateY_out: [0, -20, { start: 0.9, end: 0.95 }],
+                    messageA_opacity_out: [1, 0, { start: 0.9, end: 0.95 }],
                 }
             },
             {
                 // 3
                 type: 'sticky',
-                heightNum: 5,
+                heightNum: 4,
                 scrollHeight: 0,
                 objs: {
                     container: document.querySelector('#scroll-section-3'),
@@ -127,8 +116,8 @@ export const Main = () => {
                     canvas: document.querySelector('.image-blend-canvas'),
                     context: document.querySelector('.image-blend-canvas').getContext('2d'),
                     imagesPath: [
-                        '../images/blend-image-1.jpg',
-                        '../images/blend-image-2.jpg'
+                        '../images/blend-img-1.png',
+                        '../images/blend-img-2.png'
                     ],
                     images: [],
 
@@ -148,7 +137,7 @@ export const Main = () => {
                     messageA_opacity_in: [0, 1, { start: 0, end: 0 }],
                     messageA_opacity_out: [1, 0, { start: 0, end: 0 }]
                 }
-            }
+            },
         ]
         lSceneInfo = sceneInfoList;
     };
@@ -158,21 +147,21 @@ export const Main = () => {
         let imgElem;
         let lScene = _.cloneDeep(lSceneInfo);
         let imgArry1 = [];
-		for (let i = 0; i < lScene[0].values.videoImageCount; i++) {
+
+		for (let i = 1; i < lScene[0].values.videoImageCount; i++) {
 			imgElem = new Image();
-			imgElem.src = `../video/001/IMG_MAIN (${1 + i}).JPG`;
+			imgElem.src = `../video/001/MAIN_IMG (${i}).jpg`;
             imgArry1.push(imgElem);
         }
         
-        console.log(lScene, imgArry1, lScene[0].objs.videoImages, lScene[0]);
         lScene[0].objs.videoImages = imgArry1;
 
         let imgElem2;
         let imgArry2 = [];
-		for (let i = 0; i < lScene[2].values.videoImageCount; i++) {
+		for (let i = 1; i < lScene[2].values.videoImageCount; i++) {
 			imgElem2 = new Image();
-			imgElem2.src = `../video/002/IMG_${7027 + i}.JPG`;
-            imgArry2 = [];
+			imgElem2.src = `../video/002/SUB_IMG (${i}).jpg`;
+            imgArry2.push(imgElem2);
         }
         
         lScene[2].objs.videoImages = imgArry2;
@@ -254,8 +243,7 @@ export const Main = () => {
 			}
 		} else {
 			rv = scrollRatio * (values[1] - values[0]) + values[0];
-		}
-
+        }
 		return rv;
     }
     
@@ -271,9 +259,8 @@ export const Main = () => {
 				// console.log('0 play');
 				// let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
 				// objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-				objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
-
-				if (scrollRatio <= 0.22) {
+                objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
+				if (scrollRatio <= 0.28) {
 					// in
 					objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
 					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
@@ -283,7 +270,7 @@ export const Main = () => {
 					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset)}%, 0)`;
 				}
 
-				if (scrollRatio <= 0.42) {
+				if (scrollRatio <= 0.57) {
 					// in
 					objs.messageB.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset);
 					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset)}%, 0)`;
@@ -293,7 +280,7 @@ export const Main = () => {
 					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset)}%, 0)`;
 				}
 
-				if (scrollRatio <= 0.62) {
+				if (scrollRatio <= 0.82) {
 					// in
 					objs.messageC.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset);
 					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset)}%, 0)`;
@@ -303,23 +290,9 @@ export const Main = () => {
 					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset)}%, 0)`;
 				}
 
-				if (scrollRatio <= 0.82) {
-					// in
-					objs.messageD.style.opacity = calcValues(values.messageD_opacity_in, currentYOffset);
-					objs.messageD.style.transform = `translate3d(0, ${calcValues(values.messageD_translateY_in, currentYOffset)}%, 0)`;
-				} else {
-					// out
-					objs.messageD.style.opacity = calcValues(values.messageD_opacity_out, currentYOffset);
-					objs.messageD.style.transform = `translate3d(0, ${calcValues(values.messageD_translateY_out, currentYOffset)}%, 0)`;
-				}
-
 				break;
 
 			case 2:
-				// console.log('2 play');
-				// let sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
-				// objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
-
 				if (scrollRatio <= 0.5) {
 					// in
 					objs.canvas.style.opacity = calcValues(values.canvas_opacity_in, currentYOffset);
@@ -336,30 +309,6 @@ export const Main = () => {
 					// out
 					objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
 					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset)}%, 0)`;
-				}
-
-				if (scrollRatio <= 0.57) {
-					// in
-					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset)}%, 0)`;
-					objs.messageB.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset);
-					objs.pinB.style.transform = `scaleY(${calcValues(values.pinB_scaleY, currentYOffset)})`;
-				} else {
-					// out
-					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset)}%, 0)`;
-					objs.messageB.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset);
-					objs.pinB.style.transform = `scaleY(${calcValues(values.pinB_scaleY, currentYOffset)})`;
-				}
-
-				if (scrollRatio <= 0.83) {
-					// in
-					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset)}%, 0)`;
-					objs.messageC.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset);
-					objs.pinC.style.transform = `scaleY(${calcValues(values.pinC_scaleY, currentYOffset)})`;
-				} else {
-					// out
-					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset)}%, 0)`;
-					objs.messageC.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset);
-					objs.pinC.style.transform = `scaleY(${calcValues(values.pinC_scaleY, currentYOffset)})`;
 				}
 
 				// currentScene 3에서 쓰는 캔버스를 미리 그려주기 시작
@@ -512,26 +461,17 @@ export const Main = () => {
 					}
 
 					// index2 추가 코드
-					values.messageA_opacity_in[2].start = values.rect1X[2].end;
-					values.messageA_opacity_in[2].end = values.blendHeight[2].start + 0.1;
-					values.messageA_opacity_out[2].start = values.messageA_opacity_in[2].end + 0.1;
-					values.messageA_opacity_out[2].end = values.messageA_opacity_out[2].start + 0.1;
+					// values.messageA_opacity_in[2].start = values.rect1X[2].end;
+					// values.messageA_opacity_in[2].end = values.blendHeight[2].start + 0.1;
+					// values.messageA_opacity_out[2].start = values.messageA_opacity_in[2].end + 0.1;
+					// values.messageA_opacity_out[2].end = values.messageA_opacity_out[2].start + 0.1;
 
-					if (scrollRatio < values.messageA_opacity_in[2].end + 0.05) {
-						objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
-					} else {
-						objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
-					}
+					// if (scrollRatio < values.messageA_opacity_in[2].end + 0.05) {
+					// 	objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
+					// } else {
+					// 	objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
+					// }
 				}
-
-				// index2 추가 코드
-				if (scrollRatio <= values.messageA_opacity_in[2].start) {
-					objs.messageA.style.opacity = values.messageA_opacity_in[0];
-				}
-				if (scrollRatio >= values.messageA_opacity_out[2].end) {
-					objs.messageA.style.opacity = values.messageA_opacity_out[1];
-				}
-
 				break;
 		}
     }
@@ -581,15 +521,39 @@ export const Main = () => {
     const loop = () => {
         delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc
         // setDelayedYOffset(delayedYOffset + (yOffset - delayedYOffset) * acc);
-
+        let innerWidth = window.innerWidth;
+        let innerHeight = window.innerHeight
 		if (!enterNewScene) {
 			if (currentScene === 0 || currentScene === 2) {
 				const currentYOffset = delayedYOffset - prevScrollHeight;
 				const objs = lSceneInfo[currentScene].objs;
 				const values = lSceneInfo[currentScene].values;
-				let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                let wh = innerWidth - innerHeight;
+                let mobW = 0;
+                let mobH = 0;
+                let pxW = 0;
+                let pxH = 0;
+
+                if (wh < 0) {
+                    mobW = innerWidth * 1.3 ;
+                    mobH = innerHeight;
+                    pxW = innerWidth / 16;
+                    pxH = pxW * 14
+                }
+
 				if (objs.videoImages[sequence]) {
-					objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                    if (wh < 0) {
+                        if (innerWidth < 1080  && innerWidth > 650) {
+                            objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                        } else {
+                            objs.context.drawImage(objs.videoImages[sequence], 0 , mobH * 0.25 , mobW, pxH);
+                        }
+                    } else {
+                        objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                    }
+                  
+					
 				}
 			}
 		}
@@ -600,7 +564,7 @@ export const Main = () => {
         if (delayedYOffset < 1) {
             scrollLoop();
             lScene[0].objs.canvas.style.opacity = 1;
-            lScene[0].objs.context.drawImage(lScene[0].objs.videoImages[0], 0, 0);
+            // lScene[0].objs.context.drawImage(lScene[0].objs.videoImages[0], 0, 0);
         }
         // setSceneInfo(lScene);
         lSceneInfo = lScene;
@@ -620,7 +584,36 @@ export const Main = () => {
 			// setRafState(false);
 		}
     }
-    
+
+    function accountDp(type) {
+        if (type === 'G') {
+            if (gAccountShow) {
+                setGDisplayStr('신부측 계좌번호 확인');
+            } else {
+                setGDisplayStr('닫기');
+            }
+            
+            setGAccountShow(!gAccountShow);
+        } else {
+            if (mAccountShow) {
+                setMDisplayStr('신랑측 계좌번호 확인');
+            } else {
+                setMDisplayStr('닫기');
+            }
+            setMAccountShow(!mAccountShow);
+        }
+    }
+
+    function copyAccount(ac) {
+        let area = document.createElement("textarea");
+        document.body.appendChild(area);
+        area.value = ac;
+        area.select();
+        document.execCommand("copy");
+        document.body.removeChild(area);
+        alert("계좌번호가 복사되었습니다.");
+    }
+
     useEffect(() => {
         settingSceneInfo();
         setCanvasImages();
@@ -666,99 +659,145 @@ export const Main = () => {
         });
     }, []);
 
+    const sectionAni = {
+        opacity: 0.6275,
+        // transform: translate3d('0px', '7.45 %', '0px'),
+    }
+    const whiteFont = {
+        color : "white",
+    }
+    const tomatoFont =  {
+        color: "#f982bc",
+        fontSize : "2rem",
+    }
+
+
+    const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth * 1.3;
+    const cHeight = (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1080 : window.innerHeight;
 
   return (
       <>
-            <section className="scroll-section" id="scroll-section-0">
-            <h1>우리 가족입니다.</h1>
+          <section className="scroll-section" id="scroll-section-0">
+              <h1>2021.11.20. <br></br> 16:40</h1>
             <div className="sticky-elem sticky-elem-canvas">
-            <canvas id="video-canvas-0" width="1920" height="1080"></canvas>
+            <canvas id="video-canvas-0" width={cWidth} height={cHeight}></canvas>
             </div>
-            <div className="sticky-elem main-message a">
-            <p>주체할 수 없는 끼</p>
+              <div className="sticky-elem main-message a story-message">
+                <p> 1450일 동안</p>
+                      
             </div>
-            <div className="sticky-elem main-message b">
-            <p>어울리는 두 사람의 만남<br />매력 발산 모드</p>
+            <div className="sticky-elem main-message b story-message">
+            <p>그리고, 함께 만들어 갈</p>
             </div>
-            <div className="sticky-elem main-message c">
+            <div className="sticky-elem main-message c story-message">
             <p>
-                온종일 편안한<br />
-                가족같은 분위기
+               다음 이야기에 <br></br> 초대 합니다.
             </p>
-            </div>
-            <div className="sticky-elem main-message d">
-            <p>나를 <br />찾아온 매혹</p>
             </div>
         </section>
         <section className="scroll-section" id="scroll-section-1">
             <p className="description">
-            <strong>안녕하세요. <br/ >박은아 그리고 문인호입니다. <br/ ></strong>
+                  <strong>안녕하세요. <br />박은아 <small>그리고</small> 문인호입니다.</strong>
             </p>
-
-            <div className="sticky-elem main-message e">
-            <p>인사드립니다</p>
-            </div>
-            <div className="sticky-elem main-message f">
-            <p>호기심 많던 젊은 날</p>
-            </div>
-            <div className="sticky-elem main-message g">
-            <p>은연중 서로를 알아보고,나아가</p>
-            </div>
-            <div className="sticky-elem main-message h">
-            <p>아름다운 시간들을 함께 쌓아가려 합니다.</p>
-            </div>
+              
         </section>
 
         <section className="scroll-section" id="scroll-section-2">
             <div className="sticky-elem sticky-elem-canvas">
-            <canvas id="video-canvas-1" width="1920" height="1080"></canvas>
+            <canvas id="video-canvas-1" width={cWidth} height={cHeight}></canvas>
             </div>
             <div className="sticky-elem main-message a">
             <p>
-                <small>편안한 촉감</small>
-                입과 하나 되다
+                <small>부모님의 아름다운 모습 그대로</small>
+                서로 사랑하며 <br></br> 행복하겠습니다.
             </p>
             </div>
-            <div className="sticky-elem desc-message b">
-            <p>
-                편안한 목넘김을 완성하는 디테일한 여러 구성 요소들, 우리는 이를
-                하나하나 새롭게 살피고 재구성하는 과정을 거쳐 새로운 수준의 머그,
-                AirMug Pro를 만들었습니다. 입에 뭔가 댔다는 감각은 어느새 사라지고
-                오롯이 당신과 음료만 남게 되죠.
-            </p>
-            <div className="pin"></div>
-            </div>
-            <div className="sticky-elem desc-message c">
-            <p>디자인 앤 퀄리티 오브 스웨덴,<br />메이드 인 차이나</p>
-            <div className="pin"></div>
-            </div>
-        </section>
-        <section className="scroll-section" id="scroll-section-3">
-            <p className="mid-message">
-            <strong>Retina 머그</strong><br />
-            아이디어를 광활하게 펼칠<br />
-            아름답고 부드러운 음료 공간.
-            </p>
-            <canvas className="image-blend-canvas" width="1920" height="1080"></canvas>
-            <p className="canvas-caption">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet at
-            fuga quae perspiciatis veniam impedit et, ratione est optio porro.
-            Incidunt aperiam nemo voluptas odit quisquam harum in mollitia.
-            Incidunt minima iusto in corporis, dolores velit. Autem, sit dolorum
-            inventore a rerum distinctio vero illo magni possimus temporibus
-            dolores neque adipisci, repudiandae repellat. Ducimus accusamus
-            similique quas earum laborum. Autem tempora repellendus asperiores
-            illum ex! Velit ea corporis odit? Ea, incidunt delectus. Sapiente
-            rerum neque error deleniti quis, et, quibusdam, est autem voluptate
-            rem voluptas. Ratione soluta similique harum nihil vel. Quas inventore
-            perferendis iusto explicabo animi eos ratione obcaecati.
-            </p>
-
-            <div className="sticky-elem main-message a">
-            <p>index2에 추가된 텍스트</p>
-            </div>
-        </section>
-          <footer className="footer"><p>{footerMsg}</p></footer>
+          </section>
+          
+          <section className="scroll-section" id="scroll-section-3">
+              <p className="mid-message">
+				<strong>2021년 11월 20일 16:40분</strong><br></br>
+				보타닉파크웨딩 카라홀<br></br>
+			 </p>
+              <canvas className="image-blend-canvas" width="1920" height="1080"></canvas>
+              <p className="canvas-caption" style={sectionAni}>
+                    <strong>인</strong> 사드립니다<br></br>
+                    <strong>호</strong> 기심 많던 젊은 날<br></br>
+                    <strong>은</strong> 연중 서로를 알아보고,나아가<br></br>
+                    <strong>아</strong> 름다운 시간들을 함께 쌓아가려 합니다.<br></br>
+                    <strong>부</strong> 부부가 되는 첫 걸음에 축하를 더해주세요.<br></br>
+                    <strong>부</strong> 족하지만 늘 감사하며 잘 살겠습니다.<br></br>
+			</p>
+          </section>
+              <div className="info-area">
+                <h1>오시는 길</h1>
+                <div className="location-area">
+                    <div className="location-img">
+                      <img src="../images/location.png" alt="." />
+                      <p> 서울 강서구 보타닉파크웨딩 <br></br><small>서울특별시 강서구 마곡동 282-3</small></p>
+                    
+                    </div>
+                    <div className="location-desc">
+                        <p>자가용</p>
+                        <small> "보타닉파크웨딩" 또는 "마곡동 282-2" <br></br> (지하3층 ~ 지하 8층 주차가능)</small>
+                        <p>지하철</p>
+                        <small> 9호선. 공항철도 마곡나루역 1,2번 출구 연결</small>
+                        <p>버스</p>
+                        <small> 마곡나루역 정류장 하차 <br></br> N65, 6645, 6648, 강서05-1, 강서07 </small>
+                    </div>
+                </div>
+                </div>
+              <div className="info-area">
+              <h1>마음 전하실 곳</h1>
+                <div className="account-area">
+                    <div className="account-info">
+                        <button type="button" className="accountBtn" 
+                        onClick={() => accountDp('M')}>
+                        {mDisplayStr}</button>
+                        <div className={`account-box ${
+                            mAccountShow? 'show' : 'hide'
+                          }`}>
+                          <div className="bank-info">
+                                <p>혼주 계좌 </p>
+                                <p> 농협 166-12-036481 (문치경)</p>
+                                <button type="button" className="copyBtn" onClick={() => copyAccount('166-12-036481')}> 복사하기 </button>
+                            </div>
+                            <div className="bank-info">
+                                  <p>신랑 계좌 </p>
+                                <p> 우리은행 1002-454-550025 (문인호)</p>
+                                <button type="button" className="copyBtn" onClick={() => copyAccount('1002-454-550025')}> 복사하기 </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="account-info">
+                        <button type="button" className="accountBtn" 
+                        onClick={() => accountDp('G')}>
+                        {gDisplayStr}</button>
+                        <div className={` account-box ${
+                            gAccountShow? 'show' : 'hide'
+                          }`}>
+                            <div className="bank-info">
+                              <p>혼주 계좌 </p>
+                              <p> 국민은행 756002-00-087043 (박상민)</p>
+                              <button type="button" className="copyBtn" onClick={() => copyAccount('756002-00-087043')}> 복사하기 </button>
+                            </div>
+                           <div className="bank-info">
+                            <p><strong> 혼주 계좌</strong></p>
+                              <p> 국민은행 215-21-0720-081 (김현숙)</p>
+                              <button type="button" className="copyBtn" onClick={() => copyAccount('215-21-0720-081')}> 복사하기 </button>
+                            </div>
+                            <div  className="bank-info">
+                              <p><strong> 신부 계좌</strong></p>
+                              <p> 국민은행 756002-00-035114 (박은아)</p>
+                          <button type="button" className="copyBtn" onClick={() => copyAccount('756002-00-035114')}> 복사하기 </button>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+              <footer class="footer">2021. 11. 20 16:40 <br></br>보타닉 파크웨딩<br></br>
+                  <small>문인호 그리고 박은아, <br></br>우리가족 및 지인 모두 행복이 가득한 하루가 되길 바랍니다.</small>
+              </footer>
+              </div>
     </>
   );
 };

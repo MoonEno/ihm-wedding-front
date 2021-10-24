@@ -1,13 +1,25 @@
 @charset 'utf-8';
 
+@font-face {
+  font-family: "gMarketFont";
+  src: url("../fonts/GmarketSansTTFMedium.woff2") format("woff2"),
+    url("../fonts/GmarketSansTTFBold.woff2") format("woff2"),
+    url("../fonts/GmarketSansTTFBold.woff") format("woff"),
+    url("../fonts/GmarketSansTTFMedium.woff") format("woff"),
+    url("../fonts/GmarketSansTTFBold.ttf") format("ttf"),
+    url("../fonts/GmarketSansTTFMedium.ttf") format("ttf");
+}
+
+
 html {
-	font-family: 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
+	font-family: 'gMarketFont', 'Apple SD Gothic Neo', Roboto, 'Noto Sans KR', NanumGothic, 'Malgun Gothic', sans-serif;
 	line-height: 1.2;
 	word-wrap: break-word;
 }
 body {
 	-webkit-font-smoothing: antialiased;
 }
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,4 +59,37 @@ button {
 	border: 0;
 	background: transparent;
 	cursor: pointer;
+}
+
+
+.mr-7p {
+    margin-right : 7%;
+}
+.mr-8p {
+    margin-right : 8%;
+}
+.mr-9p {
+    margin-right : 9%;
+}
+.mr-10p {
+    margin-right : 10%;
+}
+
+.mr-11p {
+    margin-right : 11%;
+}
+
+.mr-12p {
+    margin-right : 12%;
+}
+
+.mr-13p {
+    margin-right : 13%;
+}
+.mr-14p {
+    margin-right : 14%;
+}
+
+.mr-15p {
+    margin-right : 15%;
 }
