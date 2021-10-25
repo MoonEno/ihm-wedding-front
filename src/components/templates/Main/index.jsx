@@ -44,14 +44,15 @@ export const Main = () => {
                     messageB: document.querySelector('#scroll-section-0 .main-message.b'),
                     messageC: document.querySelector('#scroll-section-0 .main-message.c'),
                     messageD: document.querySelector('#scroll-section-0 .main-message.d'),
-                    canvas: document.querySelector('#video-canvas-0'),
-                    context: document.querySelector('#video-canvas-0').getContext('2d'),
+                    videoElem: document.querySelector('.sample-video'),
+                    // canvas: document.querySelector('#video-canvas-0'),
+                    // context: document.querySelector('#video-canvas-0').getContext('2d'),
                     videoImages: []
                 },
                 values: {
-                    videoImageCount: 659,
-                    imageSequence: [0, 658],
-                    canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
+                    // videoImageCount: 659,
+                    // imageSequence: [0, 658],
+                    video_opacity: [1, 0, { start: 0.9, end: 1 }],
                     messageA_opacity_in: [0, 1, { start: 0, end: 0.25 }],
                     messageB_opacity_in: [0, 1, { start: 0.3, end: 0.5 }],
                     messageC_opacity_in: [0, 1, { start: 0.55, end: 0.8 }],
@@ -59,7 +60,7 @@ export const Main = () => {
                     messageA_translateY_in: [20, 0, { start: 0.05, end: 0.25 }],
                     messageB_translateY_in: [20, 0, { start: 0.3, end: 0.5 }],
                     messageC_translateY_in: [20, 0, { start: 0.55, end: 0.8 }],
-                    messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
+                    // messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
                     messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3 }],
                     messageB_opacity_out: [1, 0, { start: 0.5, end: 0.55 }],
                     messageC_opacity_out: [1, 0, { start: 0.8, end: 0.9 }],
@@ -67,7 +68,7 @@ export const Main = () => {
                     messageA_translateY_out: [0, -20, { start: 0.25, end: 0.3 }],
                     messageB_translateY_out: [0, -20, { start: 0.5, end: 0.55 }],
                     messageC_translateY_out: [0, -20, { start: 0.8, end: 0.9}],
-                    messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9 }]
+                    // messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9 }]
                 }
             },
             {
@@ -144,17 +145,17 @@ export const Main = () => {
     
     // 캔버스 이미지 생성
     const setCanvasImages = () => {
-        let imgElem;
         let lScene = _.cloneDeep(lSceneInfo);
-        let imgArry1 = [];
+        // let imgElem;
+        // let imgArry1 = [];
 
-		for (let i = 1; i < lScene[0].values.videoImageCount; i++) {
-			imgElem = new Image();
-			imgElem.src = `../video/001/MAIN_IMG (${i}).jpg`;
-            imgArry1.push(imgElem);
-        }
+		// for (let i = 1; i < lScene[0].values.videoImageCount; i++) {
+		// 	imgElem = new Image();
+		// 	imgElem.src = `../video/001/MAIN_IMG (${i}).jpg`;
+        //     imgArry1.push(imgElem);
+        // }
         
-        lScene[0].objs.videoImages = imgArry1;
+        // lScene[0].objs.videoImages = imgArry1;
 
         let imgElem2;
         let imgArry2 = [];
@@ -215,7 +216,7 @@ export const Main = () => {
 		document.body.setAttribute('id', `show-scene-${currentScene}`);
 
         const heightRatio = window.innerHeight / 1080;
-		lScene[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+		// lScene[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
         lScene[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
         
         // setSceneInfo(sceneInfo);
@@ -226,8 +227,8 @@ export const Main = () => {
        let rv;
 		// 현재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
 		const scrollHeight = lSceneInfo[currentScene].scrollHeight;
-		const scrollRatio = currentYOffset / scrollHeight;
-
+        const scrollRatio = currentYOffset / scrollHeight;
+        
 		if (values.length === 3) {
 			// start ~ end 사이에 애니메이션 실행
 			const partScrollStart = values[2].start * scrollHeight;
@@ -252,43 +253,50 @@ export const Main = () => {
 		const values = lSceneInfo[currentScene].values;
 		const currentYOffset = yOffset - prevScrollHeight;
 		const scrollHeight = lSceneInfo[currentScene].scrollHeight;
-		const scrollRatio = currentYOffset / scrollHeight;
+        const scrollRatio = currentYOffset / scrollHeight;
+        let progress = null;
 
-		switch (currentScene) {
-			case 0:
-				// console.log('0 play');
-				// let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-				// objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
-				if (scrollRatio <= 0.28) {
-					// in
-					objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
-					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
-				} else {
-					// out
-					objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
-					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset)}%, 0)`;
-				}
+        switch (currentScene) {
+            case 0:
+                // console.log('0 play');
+                // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                objs.videoElem.style.opacity = calcValues(values.video_opacity, currentYOffset);
+                if (scrollRatio <= 0.28) {
+                    // in
+                    objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
+                    objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
+                } else {
+                    // out
+                    objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
+                    objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset)}%, 0)`;
+                }
 
-				if (scrollRatio <= 0.57) {
-					// in
-					objs.messageB.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset);
-					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset)}%, 0)`;
-				} else {
-					// out
-					objs.messageB.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset);
-					objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset)}%, 0)`;
-				}
+                if (scrollRatio <= 0.57) {
+                    // in
+                    objs.messageB.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset);
+                    objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset)}%, 0)`;
+                } else {
+                    // out
+                    objs.messageB.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset);
+                    objs.messageB.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset)}%, 0)`;
+                }
 
-				if (scrollRatio <= 0.82) {
-					// in
-					objs.messageC.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset);
-					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset)}%, 0)`;
-				} else {
-					// out
-					objs.messageC.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset);
-					objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset)}%, 0)`;
-				}
+                if (scrollRatio <= 0.82) {
+                    // in
+                    objs.messageC.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset);
+                    objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset)}%, 0)`;
+                } else {
+                    // out
+                    objs.messageC.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset);
+                    objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset)}%, 0)`;
+                }
+
+                progress = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                objs.videoElem.currentTime = objs.videoElem.duration * (progress * 3.3)
 
 				break;
 
@@ -524,7 +532,7 @@ export const Main = () => {
         let innerWidth = window.innerWidth;
         let innerHeight = window.innerHeight
 		if (!enterNewScene) {
-			if (currentScene === 0 || currentScene === 2) {
+			if (currentScene === 2) {
 				const currentYOffset = delayedYOffset - prevScrollHeight;
 				const objs = lSceneInfo[currentScene].objs;
 				const values = lSceneInfo[currentScene].values;
@@ -563,7 +571,7 @@ export const Main = () => {
         let lScene = _.cloneDeep(lSceneInfo);
         if (delayedYOffset < 1) {
             scrollLoop();
-            lScene[0].objs.canvas.style.opacity = 1;
+            // lScene[0].objs.canvas.style.opacity = 1;
             // lScene[0].objs.context.drawImage(lScene[0].objs.videoImages[0], 0, 0);
         }
         // setSceneInfo(lScene);
@@ -672,22 +680,22 @@ export const Main = () => {
     }
 
 
-    const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth * 1.3;
+    const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth * 1.2;
     const cHeight = (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1080 : window.innerHeight;
 
   return (
       <>
           <section className="scroll-section" id="scroll-section-0">
               <h1>2021.11.20. <br></br> 16:40</h1>
-            <div className="sticky-elem sticky-elem-canvas">
-            <canvas id="video-canvas-0" width={cWidth} height={cHeight}></canvas>
-            </div>
+              <div className="sticky-elem sticky-elem-canvas">
+                  <video className="sample-video" src="../video/main.mp4" width={cWidth} height={cHeight} muted></video>
+              </div>
               <div className="sticky-elem main-message a story-message">
                 <p> 1450일 동안</p>
                       
-            </div>
+              </div>
             <div className="sticky-elem main-message b story-message">
-            <p>그리고, 함께 만들어 갈</p>
+            <p>그리고, <br></br> 함께 만들어 갈</p>
             </div>
             <div className="sticky-elem main-message c story-message">
             <p>
@@ -795,7 +803,7 @@ export const Main = () => {
                         </div>
                     </div>
               </div>
-              <footer class="footer">
+              <footer className="footer">
                   <small>우리가족 및 지인 모두 행복이 가득한 하루가 되길 바랍니다.
                       <br></br>문인호 그리고 박은아 두손모아 올림
                   </small>
