@@ -66,6 +66,7 @@ module.exports = {
   devServer: {
     port: 7070,
     host: "0.0.0.0",
+    disableHostCheck: true,
     contentBase: path.resolve(`${__dirname}`),
     inline: true,
     historyApiFallback: true,
