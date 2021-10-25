@@ -675,9 +675,6 @@ export const Main = () => {
         });
     }, []);
 
-    const videoOnLoad = () => {
-        document.querySelector('.before-load').classList.remove('before-load');
-    }
 
     const sectionAni = {
         opacity: 0.6275,
@@ -700,7 +697,7 @@ export const Main = () => {
           <section className="scroll-section" id="scroll-section-0">
               <h1>2021.11.20. <br></br> 16:40</h1>
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className="sample-video" src="../video/main.mp4" width={cWidth} height={cHeight} onLoadedData={videoOnLoad} muted ></video>
+                  <video className="sample-video" src="../video/main.mp4" width={cWidth} height={cHeight} onLoadedData={() => document.querySelector('.before-load').classList.remove('before-load')} muted ></video>
               </div>
               <div className="sticky-elem main-message a story-message">
                 <p> 1450일 동안</p>
