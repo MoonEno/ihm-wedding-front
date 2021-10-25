@@ -44,7 +44,7 @@ export const Main = () => {
                     messageB: document.querySelector('#scroll-section-0 .main-message.b'),
                     messageC: document.querySelector('#scroll-section-0 .main-message.c'),
                     messageD: document.querySelector('#scroll-section-0 .main-message.d'),
-                    videoElem: document.querySelector('.sample-video'),
+                    videoElem: document.querySelector('.main-video'),
                     // canvas: document.querySelector('#video-canvas-0'),
                     // context: document.querySelector('#video-canvas-0').getContext('2d'),
                     videoImages: []
@@ -91,15 +91,16 @@ export const Main = () => {
                     messageA: document.querySelector('#scroll-section-2 .a'),
                     messageB: document.querySelector('#scroll-section-2 .b'),
                     messageC: document.querySelector('#scroll-section-2 .c'),
-                    canvas: document.querySelector('#video-canvas-1'),
-                    context: document.querySelector('#video-canvas-1').getContext('2d'),
+                    videoElem: document.querySelector('.second-video'),
+                    // canvas: document.querySelector('#video-canvas-1'),
+                    // context: document.querySelector('#video-canvas-1').getContext('2d'),
                     videoImages: []
                 },
                 values: {
-                    videoImageCount: 620,
-                    imageSequence: [0, 619],
-                    canvas_opacity_in: [0, 1, { start: 0, end: 0.1 }],
-                    canvas_opacity_out: [1, 0, { start: 0.95, end: 1 }],
+                    // videoImageCount: 620,
+                    // imageSequence: [0, 619],
+                    video_opacity_in: [0, 1, { start: 0, end: 0.1 }],
+                    video_opacity_out: [1, 0, { start: 0.95, end: 1 }],
                     messageA_translateY_in: [20, 0, { start: 0.15, end: 0.85 }],
                     messageA_opacity_in: [0, 1, { start: 0.15, end: 0.85 }],
                     messageA_translateY_out: [0, -20, { start: 0.9, end: 0.95 }],
@@ -157,15 +158,15 @@ export const Main = () => {
         
         // lScene[0].objs.videoImages = imgArry1;
 
-        let imgElem2;
-        let imgArry2 = [];
-		for (let i = 1; i < lScene[2].values.videoImageCount; i++) {
-			imgElem2 = new Image();
-			imgElem2.src = `../video/002/SUB_IMG (${i}).jpg`;
-            imgArry2.push(imgElem2);
-        }
+        // let imgElem2;
+        // let imgArry2 = [];
+		// for (let i = 1; i < lScene[2].values.videoImageCount; i++) {
+		// 	imgElem2 = new Image();
+		// 	imgElem2.src = `../video/002/SUB_IMG (${i}).jpg`;
+        //     imgArry2.push(imgElem2);
+        // }
         
-        lScene[2].objs.videoImages = imgArry2;
+        // lScene[2].objs.videoImages = imgArry2;
 
         let imgElem3;
         for (let i = 0; i < lScene[3].objs.imagesPath.length; i++) {
@@ -217,8 +218,7 @@ export const Main = () => {
 
         const heightRatio = window.innerHeight / 1080;
 		// lScene[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        lScene[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        
+        // lScene[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
         // setSceneInfo(sceneInfo);
         lSceneInfo = lScene;
 
@@ -229,6 +229,8 @@ export const Main = () => {
 		// 현재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
 		const scrollHeight = lSceneInfo[currentScene].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
+
+        console.log(value);
         
 		if (values.length === 3) {
 			// start ~ end 사이에 애니메이션 실행
@@ -294,6 +296,7 @@ export const Main = () => {
                 }
 
                 progress = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+
                 if (progress < 0) progress = 0;
                 if (progress > 1) progress = 1;
 
@@ -305,13 +308,15 @@ export const Main = () => {
 
 				break;
 
-			case 2:
+            case 2:
+                console.log("scrollRatio", scrollRatio);
 				if (scrollRatio <= 0.5) {
 					// in
-					objs.canvas.style.opacity = calcValues(values.canvas_opacity_in, currentYOffset);
+                    objs.videoElem.style.opacity = calcValues(values.video_opacity_in, currentYOffset);
 				} else {
 					// out
-					objs.canvas.style.opacity = calcValues(values.canvas_opacity_out, currentYOffset);
+                     objs.videoElem.style.opacity = calcValues(values.video_opacity_out, currentYOffset);
+					// objs.canvas.style.opacity = calcValues(values.canvas_opacity_out, currentYOffset);
 				}
 
 				if (scrollRatio <= 0.25) {
@@ -322,7 +327,18 @@ export const Main = () => {
 					// out
 					objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
 					objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset)}%, 0)`;
-				}
+                }
+
+                progress = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+                
+                if (progress < 0) progress = 0;
+                if (progress > 1) progress = 1;
+
+                
+                let time2 = Math.floor(objs.videoElem.duration * (progress * 3.3));
+                
+
+                objs.videoElem.currentTime = time2;
 
 				// currentScene 3에서 쓰는 캔버스를 미리 그려주기 시작
 				if (scrollRatio > 0.9) {
@@ -537,38 +553,38 @@ export const Main = () => {
         let innerWidth = window.innerWidth;
         let innerHeight = window.innerHeight
 		if (!enterNewScene) {
-			if (currentScene === 2) {
-				const currentYOffset = delayedYOffset - prevScrollHeight;
-				const objs = lSceneInfo[currentScene].objs;
-				const values = lSceneInfo[currentScene].values;
-                let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                let wh = innerWidth - innerHeight;
-                let mobW = 0;
-                let mobH = 0;
-                let pxW = 0;
-                let pxH = 0;
+			// if (currentScene === 2) {
+			// 	const currentYOffset = delayedYOffset - prevScrollHeight;
+			// 	const objs = lSceneInfo[currentScene].objs;
+			// 	const values = lSceneInfo[currentScene].values;
+            //     let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+            //     let wh = innerWidth - innerHeight;
+            //     let mobW = 0;
+            //     let mobH = 0;
+            //     let pxW = 0;
+            //     let pxH = 0;
 
-                if (wh < 0) {
-                    mobW = innerWidth * 1.3 ;
-                    mobH = innerHeight;
-                    pxW = innerWidth / 16;
-                    pxH = pxW * 14
-                }
+            //     if (wh < 0) {
+            //         mobW = innerWidth * 1.3 ;
+            //         mobH = innerHeight;
+            //         pxW = innerWidth / 16;
+            //         pxH = pxW * 14
+            //     }
 
-				if (objs.videoImages[sequence]) {
-                    if (wh < 0) {
-                        if (innerWidth < 1080  && innerWidth > 650) {
-                            objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                        } else {
-                            objs.context.drawImage(objs.videoImages[sequence], 0 , mobH * 0.25 , mobW, pxH);
-                        }
-                    } else {
-                        objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                    }
+			// 	if (objs.videoImages[sequence]) {
+            //         if (wh < 0) {
+            //             if (innerWidth < 1080  && innerWidth > 650) {
+            //                 objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+            //             } else {
+            //                 objs.context.drawImage(objs.videoImages[sequence], 0 , mobH * 0.25 , mobW, pxH);
+            //             }
+            //         } else {
+            //             objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+            //         }
                   
 					
-				}
-			}
+			// 	}
+			// }
 		}
 
         // 일부 기기에서 페이지 끝으로 고속 이동하면 body id가 제대로 인식 안되는 경우를 해결
@@ -629,6 +645,9 @@ export const Main = () => {
 
     useEffect(() => {
         settingSceneInfo();
+        setCanvasImages();
+        setLayout();
+        document.querySelector('.before-load').classList.remove('before-load');
     }, []);
 
 
@@ -671,11 +690,6 @@ export const Main = () => {
         });
     }, []);
 
-    const videoOnLoad = () => {
-        document.querySelector('.before-load').classList.remove('before-load');
-        setCanvasImages();
-        setLayout();
-    }
 
     const sectionAni = {
         opacity: 0.6275,
@@ -698,7 +712,7 @@ export const Main = () => {
           <section className="scroll-section" id="scroll-section-0">
               <h1>2021.11.20. <br></br> 16:40</h1>
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className="sample-video" src="../video/main.mp4" width={cWidth} height={cHeight} onLoadedData={videoOnLoad} muted ></video>
+                  <video className="main-video" src="../video/main.mp4" width={cWidth} height={cHeight} muted ></video>
               </div>
               <div className="sticky-elem main-message a story-message">
                 <p> 1450일 동안</p>
@@ -721,8 +735,9 @@ export const Main = () => {
         </section>
 
         <section className="scroll-section" id="scroll-section-2">
-            <div className="sticky-elem sticky-elem-canvas">
-            <canvas id="video-canvas-1" width={cWidth} height={cHeight}></canvas>
+              <div className="sticky-elem sticky-elem-canvas">
+              <video className="second-video" src="../video/second.mp4" width={cWidth} height={cHeight} muted ></video>
+            {/* <canvas id="video-canvas-1" width={cWidth} height={cHeight}></canvas> */}
             </div>
             <div className="sticky-elem main-message a">
             <p>
