@@ -8,12 +8,12 @@
 # testing
 /coverage
 
-package-lock.json
+.package-lock.json
 
-package.json
 
 
 # production
+.json
 
 # misc
 .DS_Store
