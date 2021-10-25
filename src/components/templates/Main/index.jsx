@@ -221,6 +221,7 @@ export const Main = () => {
         
         // setSceneInfo(sceneInfo);
         lSceneInfo = lScene;
+
     };
     
     const calcValues = (values, currentYOffset) => {
@@ -296,7 +297,11 @@ export const Main = () => {
                 if (progress < 0) progress = 0;
                 if (progress > 1) progress = 1;
 
-                objs.videoElem.currentTime = objs.videoElem.duration * (progress * 3.3)
+                let time = Math.floor(objs.videoElem.duration * (progress * 3.3));
+                if (time === NaN) {
+                    console.log(Nan);
+                }
+                objs.videoElem.currentTime = time;
 
 				break;
 
@@ -623,9 +628,11 @@ export const Main = () => {
     }
 
     useEffect(() => {
+        console.log("here");
         settingSceneInfo();
         setCanvasImages();
         setLayout();
+        document.querySelector('.before-load').classList.remove('before-load');
     }, []);
 
 

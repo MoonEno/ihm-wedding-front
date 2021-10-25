@@ -45,14 +45,21 @@ const App = () => {
 
   return (
     <>
-      <div className="container">
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" component={MainPage} />
-            <Route path="/main" component={MainPage} />
-            <Route path="*" component={pageNotFound} />
-          </Switch>
-        </BrowserRouter>
+      <div className="before-load">
+        <div className="loading">
+          <svg className="loading-circle">
+            <circle cx="50%" cy="50%" r="25"></circle>
+          </svg>
+        </div>
+        <div className="container">
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" component={MainPage} />
+              <Route path="/main" component={MainPage} />
+              <Route path="*" component={pageNotFound} />
+            </Switch>
+          </BrowserRouter>
+        </div>
       </div>
     </>
   );
