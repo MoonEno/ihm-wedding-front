@@ -632,11 +632,10 @@ export const Main = () => {
         settingSceneInfo();
         setCanvasImages();
         setLayout();
-        document.querySelector('.before-load').classList.remove('before-load');
     }, []);
 
 
-    useEffect(() => {
+     useEffect(() => {
         window.onscroll = () => {
             yOffset = window.pageYOffset;
             // setYOffset(window.pageYOffset)
@@ -650,6 +649,13 @@ export const Main = () => {
                 // setRafState(true);
             }
         }
+    }, []);
+
+
+    useEffect(() => {
+          window.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelector('.before-load').classList.remove('before-load');
+        });
     }, []);
 
     useEffect(() => {
