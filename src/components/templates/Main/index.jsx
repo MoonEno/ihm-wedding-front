@@ -572,7 +572,7 @@ export const Main = () => {
         // 페이지 맨 아래로 갈 경우: 마지막 섹션은 스크롤 계산으로 위치 및 크기를 결정해야할 요소들이 많아서 1픽셀을 움직여주는 것으로 해결
         if ((document.body.offsetHeight - window.innerHeight) - delayedYOffset < 1) {
             let tempYOffset = yOffset;
-            scrollTo(0, tempYOffset - 1);
+            // scrollTo(0, tempYOffset - 1);
         }
 
         rafId = requestAnimationFrame(loop);
@@ -725,7 +725,7 @@ export const Main = () => {
                     <strong>호</strong> 기심 많던 젊은 날<br></br>
                     <strong>은</strong> 연중 서로를 알아보고,나아가<br></br>
                     <strong>아</strong> 름다운 시간들을 함께 쌓아가려 합니다.<br></br>
-                    <strong>부</strong> 부부가 되는 첫 걸음에 축하를 더해주세요.<br></br>
+                    <strong>부</strong> 부가 되는 첫 걸음에 축하를 더해주세요.<br></br>
                     <strong>부</strong> 족하지만 늘 감사하며 잘 살겠습니다.<br></br>
 			</p>
           </section>
@@ -741,7 +741,8 @@ export const Main = () => {
                         <p>자가용</p>
                         <small> "보타닉파크웨딩" 또는 "마곡동 282-2" <br></br> (지하3층 ~ 지하 8층 주차가능)</small>
                         <p>지하철</p>
-                        <small> 9호선. 공항철도 마곡나루역 1,2번 출구 연결</small>
+                      <small> 9호선. 공항철도 마곡나루역 <br></br>
+                          1,2번 출구 연결</small>
                         <p>버스</p>
                         <small> 마곡나루역 정류장 하차 <br></br> N65, 6645, 6648, 강서05-1, 강서07 </small>
                     </div>
