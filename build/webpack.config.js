@@ -62,7 +62,7 @@ module.exports = {
     ],
   },
   devServer: {
-    port: 8080,
+    port: 7070,
     contentBase: path.resolve(`${__dirname}`),
     inline: true,
     writeToDisk: true,

@@ -38,7 +38,7 @@ body.before-load {
   font-size: 4.5rem;
   text-align: center;
   color: #ffc3e1;
-  text-shadow: 2px 6px 2px #FDFDFD;
+  text-shadow: 1px 3px 1px rgb(168, 164, 164);
 
   
 }
@@ -63,7 +63,7 @@ body.before-load {
     font-weight: bold;
     text-align: center;
     line-height: 1.2;
-    text-shadow: 1px 2px 1px gray;
+    text-shadow: 1px 2px 1px rgb(168, 164, 164);
 }
 
 .story-message p {
@@ -149,11 +149,12 @@ body.before-load {
 }
 
 .footer small {
-    margin-top: 2%;
-    font-size: 0.8rem;
+    margin-top: 3%;
+    font-size: 0.9rem;
 }
 .footer p {
-    font-size: 2rem;
+    margin-top: 3%;
+    font-size: 1.1rem;
 }
 .sticky-elem {
   display: none;

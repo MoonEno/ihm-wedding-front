@@ -795,8 +795,10 @@ export const Main = () => {
                         </div>
                     </div>
               </div>
-              <footer class="footer">2021. 11. 20 16:40 <br></br>보타닉 파크웨딩<br></br>
-                  <small>문인호 그리고 박은아, <br></br>우리가족 및 지인 모두 행복이 가득한 하루가 되길 바랍니다.</small>
+              <footer class="footer">
+                  <small>우리가족 및 지인 모두 행복이 가득한 하루가 되길 바랍니다.
+                      <br></br>문인호 그리고 박은아 두손모아 올림
+                  </small>
               </footer>
               </div>
     </>
