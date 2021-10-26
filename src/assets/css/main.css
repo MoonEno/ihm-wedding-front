@@ -309,6 +309,7 @@ body.before-load {
   background: white;
   opacity: 0;
   transition: 0.5s;
+  height: 50%;
 }
 .before-load .container {
   display: none;
@@ -337,6 +338,7 @@ body.before-load {
   width: 54px;
   height: 54px;
   animation: loading-spin 3s infinite;
+  margin-top: 100%;
 }
 .loading-circle circle {
   stroke: black;
