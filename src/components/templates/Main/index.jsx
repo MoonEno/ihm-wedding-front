@@ -217,8 +217,8 @@ export const Main = () => {
 		document.body.setAttribute('id', `show-scene-${currentScene}`);
 
         const heightRatio = window.innerHeight / 1080;
-		// lScene[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
-        // lScene[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+		// lScene[0].objs.videoElem.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
+        // lScene[2].objs.videoElem.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
         // setSceneInfo(sceneInfo);
         lSceneInfo = lScene;
 
@@ -229,8 +229,6 @@ export const Main = () => {
 		// 현재 씬(스크롤섹션)에서 스크롤된 범위를 비율로 구하기
 		const scrollHeight = lSceneInfo[currentScene].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
-
-        console.log(value);
         
 		if (values.length === 3) {
 			// start ~ end 사이에 애니메이션 실행
@@ -261,7 +259,6 @@ export const Main = () => {
 
         switch (currentScene) {
             case 0:
-                // console.log('0 play');
                 // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
                 // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
                 objs.videoElem.style.opacity = calcValues(values.video_opacity, currentYOffset);
@@ -301,16 +298,13 @@ export const Main = () => {
                 if (progress > 1) progress = 1;
 
                 let time = Math.floor(objs.videoElem.duration * (progress * 3.3));
-                if (time === NaN) {
-                    console.log(Nan);
-                }
                 objs.videoElem.currentTime = time;
 
 				break;
 
             case 2:
-                console.log("scrollRatio", scrollRatio);
-				if (scrollRatio <= 0.5) {
+                
+				if (scrollRatio <= 0.6) {
 					// in
                     objs.videoElem.style.opacity = calcValues(values.video_opacity_in, currentYOffset);
 				} else {
@@ -334,9 +328,7 @@ export const Main = () => {
                 if (progress < 0) progress = 0;
                 if (progress > 1) progress = 1;
 
-                
-                let time2 = Math.floor(objs.videoElem.duration * (progress * 3.3));
-                
+                let time2 = Math.floor(objs.videoElem.duration * (progress * 1.4));
 
                 objs.videoElem.currentTime = time2;
 
@@ -388,7 +380,6 @@ export const Main = () => {
 				break;
 
 			case 3:
-				// console.log('3 play');
 				let step = 0;
 				// 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
 				const widthRatio = window.innerWidth / objs.canvas.width;
@@ -615,6 +606,7 @@ export const Main = () => {
     }
 
     function accountDp(type) {
+        console.log("here");
         if (type === 'G') {
             if (gAccountShow) {
                 setGDisplayStr('신부측 계좌번호 확인');
@@ -644,10 +636,10 @@ export const Main = () => {
     }
 
     useEffect(() => {
+        setTimeout(() => document.querySelector('.before-load').classList.remove('before-load'), 2500);
         settingSceneInfo();
         setCanvasImages();
         setLayout();
-        document.querySelector('.before-load').classList.remove('before-load');
     }, []);
 
 
@@ -682,7 +674,6 @@ export const Main = () => {
 
     useEffect(() => {
         window.addEventListener('orientationchange', () => {
-            console.log("orientationchange");
             scrollTo(0, 0);
             setTimeout(() => {
                 window.location.reload();
@@ -712,7 +703,7 @@ export const Main = () => {
           <section className="scroll-section" id="scroll-section-0">
               <h1>2021.11.20. <br></br> 16:40</h1>
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className="main-video" src="../video/main.mp4" width={cWidth} height={cHeight} muted ></video>
+                  <video className="main-video" src="../video/main.mp4" width={cWidth} height={cHeight} muted playsInline ></video>
               </div>
               <div className="sticky-elem main-message a story-message">
                 <p> 1450일 동안</p>
