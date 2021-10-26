@@ -21,6 +21,7 @@ export const Main = () => {
     const [mAccountShow, setMAccountShow] = useState(false);
     const [gDisplayStr, setGDisplayStr] = useState('신부측  계좌번호 확인');
     const [gAccountShow, setGAccountShow] = useState(false);
+    const [winYoffset, setWinYoffset] = useState(0);
 
     const [preventScroll, setPreventScroll] = useState(true);
     const [scrollAble, setScrollAble] = useState(false);
@@ -56,15 +57,14 @@ export const Main = () => {
                 values: {
                     // videoImageCount: 659,
                     // imageSequence: [0, 658],
-                    video_opacity_in: [0, 1, { start: 0.05, end: 0.1 }],
-                    video_opacity_out: [1, 0, { start: 0.95, end: 1 }],
-                    messageA_opacity_in: [0, 1, { start: 0, end: 0.25 }],
+                    video_opacity: [1, 0, { start: 0.9, end: 1 }],
+                    messageA_opacity_in: [0.6, 1, { start: 0, end: 0.25 }],
                     messageB_opacity_in: [0, 1, { start: 0.3, end: 0.5 }],
                     messageC_opacity_in: [0, 1, { start: 0.55, end: 0.8 }],
                     // messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
-                    messageA_translateY_in: [20, 0, { start: 0.05, end: 0.25 }],
-                    messageB_translateY_in: [20, 0, { start: 0.3, end: 0.5 }],
-                    messageC_translateY_in: [20, 0, { start: 0.55, end: 0.8 }],
+                    messageA_translateY_in: [90, 0, { start: 0.05, end: 0.25 }],
+                    messageB_translateY_in: [90, 0, { start: 0.3, end: 0.5 }],
+                    messageC_translateY_in: [90, 0, { start: 0.55, end: 0.8 }],
                     // messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
                     messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3 }],
                     messageB_opacity_out: [1, 0, { start: 0.5, end: 0.55 }],
@@ -106,9 +106,9 @@ export const Main = () => {
                     // imageSequence: [0, 619],
                     video_opacity_in: [0, 1, { start: 0, end: 0.1 }],
                     video_opacity_out: [1, 0, { start: 0.95, end: 1 }],
-                    messageA_translateY_in: [20, 0, { start: 0.15, end: 0.85 }],
-                    messageA_opacity_in: [0, 1, { start: 0.15, end: 0.85 }],
-                    messageA_translateY_out: [0, -20, { start: 0.9, end: 0.95 }],
+                    messageA_translateY_in: [70, 0, { start: 0.1, end: 0.3 }],
+                    messageA_opacity_in: [0.4, 1, { start: 0.35, end: 0.75 }],
+                    messageA_translateY_out: [0, -30, { start: 0.8, end: 0.9 }],
                     messageA_opacity_out: [1, 0, { start: 0.9, end: 0.95 }],
                 }
             },
@@ -207,7 +207,7 @@ export const Main = () => {
 		}
 
         yOffset = window.pageYOffset;
-		// setYOffset(window.pageYOffset);
+		// setWinYoffset(window.pageYOffset);
 
 		let totalScrollHeight = 0;
 		for (let i = 0; i < lScene.length; i++) {
@@ -251,6 +251,7 @@ export const Main = () => {
 		} else {
 			rv = scrollRatio * (values[1] - values[0]) + values[0];
         }
+        
 		return rv;
     }
     
@@ -266,14 +267,12 @@ export const Main = () => {
             case 0:
                 // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
                 // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                if (scrollRatio <= 0.6) {
-                     objs.videoElem.style.opacity = calcValues(values.video_opacity_in, currentYOffset);
-                } else {
-                    objs.videoElem.style.opacity = calcValues(values.video_opacity_out, currentYOffset);
-                }
+             
+                objs.videoElem.style.opacity = calcValues(values.video_opacity, currentYOffset);
                 
                 if (scrollRatio <= 0.28) {
                     // in
+                    console.log("calcValues(values.messageA_translateY_in, currentYOffset)", calcValues(values.messageA_translateY_in, currentYOffset));
                     objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
                     objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
                 } else {
@@ -670,7 +669,7 @@ export const Main = () => {
              }
              
             yOffset = window.pageYOffset;
-            // setYOffset(window.pageYOffset)
+            setWinYoffset(window.pageYOffset);
             scrollLoop();
             checkMenu();
 
@@ -706,7 +705,7 @@ export const Main = () => {
     }, []);
 
     const onEnd = () => {
-        setscrollAble(true);
+        setScrollAble(true);
         setPreventScroll(false);
     }
 
@@ -714,30 +713,31 @@ export const Main = () => {
         opacity: 0.6275,
     }
 
+    const minus30Vh = {
+        marginTop : "-30vh",
+    }
 
-
-    const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth * 1.2;
+    const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth;
     const cHeight = (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1080 : window.innerHeight;
 
   return (
       <div>
-          <div className="welcomeVideo scroll-section">
-            <video className={`${scrollAble ? `hide` : `show`}`} muted autoPlay width={cWidth} height={cHeight}>
-                <source src="../video/main.mp4" type="video/mp4"></source>
+          <div className="welcomeVideo">
+            <video className={`${winYoffset > 50 ? `hide` : `show`}`} muted autoPlay width={cWidth} height={cHeight}>
+                <source src="../video/couple.mp4" type="video/mp4"></source>
             </video>
-            <CountUp end={1450} duration="5" onEnd={onEnd} />
-              <h2 className={`scrolldown-desc ${scrollAble ? `show` : `hide`}`}>화면을 내려주세요.</h2>
+            <CountUp className={`${winYoffset > 50 ? `hide` : `show`}`} end={1450} duration="16" onEnd={onEnd} />
+              <h2 className={`scrolldown-desc ${scrollAble && winYoffset < 50 ? `show` : `hide`}`}>화면을 내려주세요.</h2>
+              <div className={`mouse ${scrollAble && winYoffset < 50 ? `show` : `hide`}`}></div>
           </div>
-          <div className={`mouse ${scrollAble ? `show` : `hide`}`}></div>
           <section className="scroll-section" id="scroll-section-0">
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className={`main-video ${scrollAble ? `show` : `hide`}`} width={cWidth} height={cHeight} muted >
+                  <video className="main-video" width={cWidth} height={cHeight} muted >
                        <source src="../video/main.mp4#t=0.001" preload="metadata" type="video/mp4" />
                   </video>
               </div>
               <div className="sticky-elem main-message a story-message">
-                <p> 1450일 동안</p>
-                      
+                <p> <strong className="dDay">1450</strong>일 동안</p>
               </div>
             <div className="sticky-elem main-message b story-message">
             <p>그리고, <br></br> 함께 만들어 갈</p>
@@ -785,7 +785,7 @@ export const Main = () => {
 			</p>
           </section>
               <div className="info-area">
-                <h1>오시는 길</h1>
+                <h1 style={minus30Vh}>오시는 길</h1>
                 <div className="location-area">
                     <div className="location-img">
                       <img src="../images/location.png" alt="." />
