@@ -684,14 +684,6 @@ export const Main = () => {
 
     const sectionAni = {
         opacity: 0.6275,
-        // transform: translate3d('0px', '7.45 %', '0px'),
-    }
-    const whiteFont = {
-        color : "white",
-    }
-    const tomatoFont =  {
-        color: "#f982bc",
-        fontSize : "2rem",
     }
 
 
@@ -703,7 +695,9 @@ export const Main = () => {
           <section className="scroll-section" id="scroll-section-0">
               <h1>2021.11.20. <br></br> 16:40</h1>
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className="main-video" src="../video/main.mp4" width={cWidth} height={cHeight} muted playsInline ></video>
+                  <video className="main-video" width={cWidth} height={cHeight} muted >
+                       <source src="../video/main.mp4#t=0.001" preload="metadata" type="video/mp4" />
+                  </video>
               </div>
               <div className="sticky-elem main-message a story-message">
                 <p> 1450일 동안</p>
@@ -727,8 +721,9 @@ export const Main = () => {
 
         <section className="scroll-section" id="scroll-section-2">
               <div className="sticky-elem sticky-elem-canvas">
-              <video className="second-video" src="../video/second.mp4" width={cWidth} height={cHeight} muted ></video>
-            {/* <canvas id="video-canvas-1" width={cWidth} height={cHeight}></canvas> */}
+               <video className="second-video" width={cWidth} height={cHeight} muted >
+                        <source src="../video/second.mp4#t=0.001" preload="metadata" type="video/mp4" />
+               </video>
             </div>
             <div className="sticky-elem main-message a">
             <p>
