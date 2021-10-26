@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useCountUp } from 'react-countup';
+import CountUp from 'react-countup';
 import 'styled-components';
 
 export const Main = () => {
@@ -19,7 +21,9 @@ export const Main = () => {
     const [mAccountShow, setMAccountShow] = useState(false);
     const [gDisplayStr, setGDisplayStr] = useState('신부측  계좌번호 확인');
     const [gAccountShow, setGAccountShow] = useState(false);
-    const [footerMsg, setFooterMsg] = useState('const 20211120 = (2) => { return 1 }');
+
+    const [preventScroll, setPreventScroll] = useState(true);
+    const [scrollAble, setScrollAble] = useState(false);
     
     let yOffset = 0; // window.pageYOffset 대신 쓸 변수
     let prevScrollHeight = 0; // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
@@ -52,7 +56,8 @@ export const Main = () => {
                 values: {
                     // videoImageCount: 659,
                     // imageSequence: [0, 658],
-                    video_opacity: [1, 0, { start: 0.9, end: 1 }],
+                    video_opacity_in: [0, 1, { start: 0.05, end: 0.1 }],
+                    video_opacity_out: [1, 0, { start: 0.95, end: 1 }],
                     messageA_opacity_in: [0, 1, { start: 0, end: 0.25 }],
                     messageB_opacity_in: [0, 1, { start: 0.3, end: 0.5 }],
                     messageC_opacity_in: [0, 1, { start: 0.55, end: 0.8 }],
@@ -221,7 +226,7 @@ export const Main = () => {
         // lScene[2].objs.videoElem.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
         // setSceneInfo(sceneInfo);
         lSceneInfo = lScene;
-
+        
     };
     
     const calcValues = (values, currentYOffset) => {
@@ -261,7 +266,12 @@ export const Main = () => {
             case 0:
                 // let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
                 // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-                objs.videoElem.style.opacity = calcValues(values.video_opacity, currentYOffset);
+                if (scrollRatio <= 0.6) {
+                     objs.videoElem.style.opacity = calcValues(values.video_opacity_in, currentYOffset);
+                } else {
+                    objs.videoElem.style.opacity = calcValues(values.video_opacity_out, currentYOffset);
+                }
+                
                 if (scrollRatio <= 0.28) {
                     // in
                     objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
@@ -636,15 +646,29 @@ export const Main = () => {
     }
 
     useEffect(() => {
-        setTimeout(() => document.querySelector('.before-load').classList.remove('before-load'), 2500);
+        // setTimeout(() => document.querySelector('.before-load').classList.remove('before-load'), 2500);
         settingSceneInfo();
         setCanvasImages();
         setLayout();
     }, []);
 
+    useEffect(() => {
+        if (preventScroll) {
+            // add listener to disable scroll
+            window.addEventListener('scroll',  scrollTo(0, 0));
+        } 
+    }, [preventScroll]);
+
 
      useEffect(() => {
-        window.onscroll = () => {
+         window.onscroll = () => {
+            
+            if (yOffset > 50) {
+                setScrollAble(false);
+            } else {
+                setScrollAble(true);
+             }
+             
             yOffset = window.pageYOffset;
             // setYOffset(window.pageYOffset)
             scrollLoop();
@@ -681,21 +705,33 @@ export const Main = () => {
         });
     }, []);
 
+    const onEnd = () => {
+        setscrollAble(true);
+        setPreventScroll(false);
+    }
 
     const sectionAni = {
         opacity: 0.6275,
     }
 
 
+
     const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth * 1.2;
     const cHeight = (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1080 : window.innerHeight;
 
   return (
-      <>
+      <div>
+          <div className="welcomeVideo scroll-section">
+            <video className={`${scrollAble ? `hide` : `show`}`} muted autoPlay width={cWidth} height={cHeight}>
+                <source src="../video/main.mp4" type="video/mp4"></source>
+            </video>
+            <CountUp end={1450} duration="5" onEnd={onEnd} />
+              <h2 className={`scrolldown-desc ${scrollAble ? `show` : `hide`}`}>화면을 내려주세요.</h2>
+          </div>
+          <div className={`mouse ${scrollAble ? `show` : `hide`}`}></div>
           <section className="scroll-section" id="scroll-section-0">
-              <h1>2021.11.20. <br></br> 16:40</h1>
               <div className="sticky-elem sticky-elem-canvas">
-                  <video className="main-video" width={cWidth} height={cHeight} muted >
+                  <video className={`main-video ${scrollAble ? `show` : `hide`}`} width={cWidth} height={cHeight} muted >
                        <source src="../video/main.mp4#t=0.001" preload="metadata" type="video/mp4" />
                   </video>
               </div>
@@ -819,7 +855,7 @@ export const Main = () => {
                       <br></br>문인호 그리고 박은아 두손모아 올림
                   </small>
               </footer>
-              </div>
-    </>
+          </div>
+       </div>
   );
 };

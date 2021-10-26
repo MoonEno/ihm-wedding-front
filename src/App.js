@@ -45,12 +45,12 @@ const App = () => {
 
   return (
     <>
-      <div className="before-load">
-        <div className="loading">
+      <div>
+        {/* <div className="loading">
           <svg className="loading-circle">
             <circle cx="50%" cy="50%" r="25"></circle>
           </svg>
-        </div>
+        </div> */}
         <div className="container">
           <BrowserRouter>
             <Switch>
