@@ -712,8 +712,8 @@ export const Main = () => {
         opacity: 0.6275,
     }
 
-    const minus30Vh = {
-        marginTop : "-30vh",
+    const minus2Vh = {
+        marginTop : "-2vh",
     }
 
     const cWidth =  (window.innerWidth > 1080 || window.innerWidth > window.innerHeight) ? 1920 : window.innerWidth;
@@ -722,7 +722,7 @@ export const Main = () => {
   return (
       <div>
           <div className="welcomeVideo">
-            <video className={`${winYoffset > 50 ? `hide` : `show`}`} autoPlay muted playsinline width={cWidth} height={cHeight}>
+            <video className={`${winYoffset > 50 ? `hide` : `show`}`} autoPlay muted playsInline width={cWidth} height={cHeight}>
                 <source src="../video/couple.mp4#t=0.001" type="video/mp4"></source>
             </video>
             <CountUp className={`${winYoffset > 50 ? `hide` : `show`}`} end={1450} duration="16" onEnd={onEnd} />
@@ -784,7 +784,7 @@ export const Main = () => {
 			</p>
           </section>
               <div className="info-area">
-                <h1 style={minus30Vh}>오시는 길</h1>
+                <h1 style={minus2Vh}>오시는 길</h1>
                 <div className="location-area">
                     <div className="location-img">
                       <img src="../images/location.png" alt="." />
