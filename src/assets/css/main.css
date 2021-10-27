@@ -31,17 +31,82 @@ body.before-load {
   position: relative;
   padding-top: 50vh;
 }
+
+.welcomeVideo {
+  display: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  height: 50%;
+}
+
 #scroll-section-0 h1 {
   position: relative;
-  top: -10vh;
+  top: -5vh;
   z-index: 5;
   font-size: 4.5rem;
   text-align: center;
   color: #ffc3e1;
   text-shadow: 1px 3px 1px rgb(168, 164, 164);
-
-  
 }
+
+.welcomeVideo span {
+    position: fixed;
+    top: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+    font-size: 4.5rem;
+    color: white;
+    margin-left: 33%;
+    text-shadow: 1px 3px 1px rgb(168, 164, 164);
+}
+
+ .scrolldown-desc {
+  position: fixed;
+  z-index: 6;
+  top: 52%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 1rem;
+  color: white;
+  margin-left: 40%;
+  text-shadow: 1px 3px 1px rgb(168, 164, 164);
+  animation: blink-effect 2s step-end infinite;
+}
+
+.mouse {
+  position: fixed;
+  top: 55%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  margin-left: 50%;
+  width: 25px;
+  height: 40px;
+  border: 3px solid white;
+  border-radius: 60px;
+}
+.mouse::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 50%;
+    opacity: 1;
+    animation: wheel 2s infinite;
+    -webkit-animation: wheel 2s infinite;
+  }
 
 
 .hide {
@@ -52,12 +117,12 @@ body.before-load {
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 35vh;
+  top: 30vh;
   margin: 5px 0;
   height: 3em;
   font-size: 3rem;
   opacity: 0;
-  color: #ffc3e1;
+  color: white;
 }
 .main-message p {
     font-weight: bold;
@@ -75,6 +140,11 @@ body.before-load {
   display: block;
   margin-bottom: 0.5em;
   font-size: 1.2rem;
+}
+.dDay {
+  font-weight: 800;
+  color:#ff80bf;
+  font-size: 3.2rem;
 }
 #scroll-section-2 .main-message {
   font-size: 3.5rem;
@@ -127,13 +197,15 @@ body.before-load {
   margin: -24rem auto 0;
   padding: 0 1rem;
   font-size: 1.2rem;
-  color: #ffc3e1;
+  color:gray;
+  font-weight: 400;
 }
 
 .canvas-caption strong {
   font-size: 2rem;
   font-weight: 1.3rem;
-  color: #ff80bf;
+  color: black;
+  font-weight: 800;
 }
 
 .footer {
@@ -141,7 +213,7 @@ body.before-load {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
+  margin-top: 20%;
   height: 7rem;
   color: white;
   background: #d294ed;
@@ -220,12 +292,12 @@ body.before-load {
   align-items: center;
   justify-content: left;
   top: 35vh;
-  font-size: 5rem;
+  font-size: 3rem;
   color: #ffc3e1;
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  margin-top: 3%;
+  margin-top: 12%;
 }
 
 .account-box {
@@ -311,12 +383,19 @@ body.before-load {
   transition: 0.5s;
   height: 50%;
 }
+
 .before-load .container {
   display: none;
 }
 .before-load .loading {
   opacity: 1;
 }
+
+@keyframes blink-effect {
+  50% {
+    opacity: 0;
+  }
+};
 
 @keyframes loading-spin {
   100% {
@@ -334,6 +413,22 @@ body.before-load {
     stroke-dashoffset: -157;
   }
 }
+
+@keyframes wheel {
+  to {
+    opacity: 0;
+    top: 30px;
+  }
+}
+
+@-webkit-keyframes wheel {
+  to {
+    opacity: 0;
+    top: 30px;
+  }
+}
+
+
 .loading-circle {
   width: 54px;
   height: 54px;
@@ -408,6 +503,11 @@ body.before-load {
     color: #f5f5f5 ;
     padding: 2%;
     height: 3.5rem;
+    margin-top: 20%;
+}
+
+.location-desc {
+  padding: 3vh;
 }
 
 @media (min-width: 1024px) {
@@ -415,6 +515,21 @@ body.before-load {
   #scroll-section-3 h1 {
     font-size: 9vw;
   }
+
+  #scroll-section-0 span {
+      font-size: 9vw;
+      margin-left: 50%;
+  }
+
+  .scrolldown-desc {
+      margin-left: 53%;
+      font-size: 3vw;
+  }
+
+  .mouse {
+      margin-left: 53%;
+  }
+
   .main-message {
     font-size: 5vw;
   }
@@ -434,6 +549,10 @@ body.before-load {
   
   .main-message small {
     font-size: 1.5vw;
+  }
+
+  .dDay {
+    font-size: 5.3vw;
   }
   .sticky-elem.desc-message {
     width: 20%;
@@ -455,14 +574,15 @@ body.before-load {
     margin-top: -8rem;
     padding: 0;
     font-size: 3rem;
-    color: #ffc3e1;
+    font-weight: 400;
+    color: gray;
 
   }
 
   .canvas-caption strong{
     font-size: 4rem;
-    font-weight: 1.3rem;
-    color: #ff80bf;
+    font-weight: 800;
+    color: white;
   }
   .location-area, .account-area{
     display: flex;
