@@ -723,8 +723,8 @@ export const Main = () => {
   return (
       <div>
           <div className="welcomeVideo">
-            <video className={`${winYoffset > 50 ? `hide` : `show`}`} muted autoPlay width={cWidth} height={cHeight}>
-                <source src="../video/couple.mp4" type="video/mp4"></source>
+            <video className={`${winYoffset > 50 ? `hide` : `show`}`} autoPlay muted playsinline width={cWidth} height={cHeight}>
+                <source src="../video/couple.mp4#t=0.001" type="video/mp4"></source>
             </video>
             <CountUp className={`${winYoffset > 50 ? `hide` : `show`}`} end={1450} duration="16" onEnd={onEnd} />
               <h2 className={`scrolldown-desc ${scrollAble && winYoffset < 50 ? `show` : `hide`}`}>화면을 내려주세요.</h2>
