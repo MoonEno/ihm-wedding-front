@@ -272,7 +272,6 @@ export const Main = () => {
                 
                 if (scrollRatio <= 0.28) {
                     // in
-                    console.log("calcValues(values.messageA_translateY_in, currentYOffset)", calcValues(values.messageA_translateY_in, currentYOffset));
                     objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
                     objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
                 } else {
