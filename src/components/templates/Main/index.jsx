@@ -305,6 +305,7 @@ export const Main = () => {
                 if (progress < 0) progress = 0;
                 if (progress > 1) progress = 1;
 
+                
                 let time = Math.floor(objs.videoElem.duration * (progress * 3.3));
                 objs.videoElem.currentTime = time;
 
@@ -614,7 +615,7 @@ export const Main = () => {
     }
 
     function accountDp(type) {
-        console.log("here");
+        
         if (type === 'G') {
             if (gAccountShow) {
                 setGDisplayStr('신부측 계좌번호 확인');
@@ -736,7 +737,7 @@ export const Main = () => {
                   </video>
               </div>
               <div className="sticky-elem main-message a story-message">
-                <p> <strong className="dDay">1450</strong>일 동안</p>
+                <p> <strong className="dDay">1450</strong>일 동안 </p> 
               </div>
             <div className="sticky-elem main-message b story-message">
             <p>그리고, <br></br> 함께 만들어 갈</p>
