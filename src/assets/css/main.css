@@ -522,12 +522,23 @@ body.before-load {
   }
 
   .scrolldown-desc {
-      margin-left: 53%;
+      margin-left: 40%;
       font-size: 3vw;
+      margin-top : 3%;
+
   }
 
   .mouse {
-      margin-left: 53%;
+      margin-left: 50%;
+      width: 35px;
+      height: 60px;
+      top: 67%
+  }
+
+  .welcomeVideo span {
+    margin-left: 43%;
+    font-size: 10rem;
+
   }
 
   .main-message {
