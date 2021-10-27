@@ -593,7 +593,7 @@ body.before-load {
   .canvas-caption strong{
     font-size: 4rem;
     font-weight: 800;
-    color: white;
+    color: black;
   }
   .location-area, .account-area{
     display: flex;

@@ -691,7 +691,7 @@ export const Main = () => {
         });
         return () => {
             window.removeEventListener('resize', window.location.reload());
-        }
+      }
     }, []);
 
     useEffect(() => {
