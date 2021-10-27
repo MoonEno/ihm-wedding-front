@@ -733,7 +733,7 @@ export const Main = () => {
           <section className="scroll-section" id="scroll-section-0">
               <div className="sticky-elem sticky-elem-canvas">
                   <video className="main-video" width={cWidth} height={cHeight} muted >
-                       <source src="../video/main.mp4#t=0.001" preload="metadata" type="video/mp4" />
+                       <source src="../video/fir.mp4#t=0.001" preload="metadata" type="video/mp4" />
                   </video>
               </div>
               <div className="sticky-elem main-message a story-message">
@@ -758,7 +758,7 @@ export const Main = () => {
         <section className="scroll-section" id="scroll-section-2">
               <div className="sticky-elem sticky-elem-canvas">
                <video className="second-video" width={cWidth} height={cHeight} muted >
-                        <source src="../video/second.mp4#t=0.001" preload="metadata" type="video/mp4" />
+                        <source src="../video/sec.mp4#t=0.001" preload="metadata" type="video/mp4" />
                </video>
             </div>
             <div className="sticky-elem main-message a">
