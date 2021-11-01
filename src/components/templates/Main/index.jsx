@@ -25,6 +25,7 @@ export const Main = () => {
 
     const [preventScroll, setPreventScroll] = useState(true);
     const [scrollAble, setScrollAble] = useState(false);
+    const [countDp, setCountDp] = useState(true);
     
     let yOffset = 0; // window.pageYOffset 대신 쓸 변수
     let prevScrollHeight = 0; // 현재 스크롤 위치(yOffset)보다 이전에 위치한 스크롤 섹션들의 스크롤 높이값의 합
@@ -193,7 +194,10 @@ export const Main = () => {
 
     // 화면별 컨텐츠 레이아웃 세팅
     const setLayout = () => {
-       
+
+      // 비디오 타이머 빠르게
+      document.querySelector('.wVideo').playbackRate = 1.35;
+
       // 각 섹션 스크롤 높이 세팅
       let lScene = _.cloneDeep(lSceneInfo);
 
@@ -707,6 +711,7 @@ export const Main = () => {
     const onEnd = () => {
         setScrollAble(true);
         setPreventScroll(false);
+        setCountDp(false);
     }
 
     const sectionAni = {
@@ -723,10 +728,10 @@ export const Main = () => {
   return (
       <div>
           <div className="welcomeVideo">
-            <video className={`${winYoffset > 50 ? `hide` : `show`}`} autoPlay muted playsInline width={cWidth} height={cHeight}>
+              <video className={`wVideo ${winYoffset > 50 ? `hide` : `show`}`} autoPlay muted playsInline width={cWidth} height={cHeight}>
                 <source src="../video/couple.mp4#t=0.001" type="video/mp4"></source>
-            </video>
-            <CountUp className={`${winYoffset > 50 ? `hide` : `show`}`} end={1450} duration="16" onEnd={onEnd} />
+              </video>
+              <CountUp className={`${countDp ? `show` : `hide`}`} start={1450} end={0} duration="8" onEnd={onEnd} />
               <h2 className={`scrolldown-desc ${scrollAble && winYoffset < 50 ? `show` : `hide`}`}>화면을 내려주세요.</h2>
               <div className={`mouse ${scrollAble && winYoffset < 50 ? `show` : `hide`}`}></div>
           </div>
